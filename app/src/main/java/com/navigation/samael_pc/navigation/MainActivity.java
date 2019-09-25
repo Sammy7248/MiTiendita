@@ -23,9 +23,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.contenedor, new Fragment01()).commit();
+        manager.beginTransaction().replace(R.id.contenedor, new Home()).commit();
 
     }
 
@@ -58,20 +56,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -80,17 +64,20 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         android.support.v4.app.FragmentManager fragment=getSupportFragmentManager();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-            fragment.beginTransaction().replace(R.id.contenedor,new Fragment01()).commit();
-        } else if (id == R.id.nav_users) {
-            fragment.beginTransaction().replace(R.id.contenedor,new Fragment2()).commit();
-        } else if (id == R.id.nav_register) {
-            fragment.beginTransaction().replace(R.id.contenedor,new Fragment03()).commit();
-        } else if (id == R.id.nav_edit) {
-            fragment.beginTransaction().replace(R.id.contenedor,new Fragment04()).commit();
-        } else if (id == R.id.nav_out) {
-            Toast.makeText(getApplicationContext(), "Cerrar sesion", Toast.LENGTH_SHORT).show();
+        if (id == R.id.home) {
+            fragment.beginTransaction().replace(R.id.contenedor,new Home()).commit();
+        } else if (id == R.id.usuarios) {
+            fragment.beginTransaction().replace(R.id.contenedor,new Usuarios()).commit();
+        } else if (id == R.id.productos) {
+            fragment.beginTransaction().replace(R.id.contenedor,new Productos()).commit();
+        } else if (id == R.id.faltantes) {
+            fragment.beginTransaction().replace(R.id.contenedor,new Faltantes()).commit();
+        } else if (id == R.id.estadisticas) {
+            //Toast.makeText(getApplicationContext(), "Cerrar sesion", Toast.LENGTH_SHORT).show();
+            fragment.beginTransaction().replace(R.id.contenedor, new Estadisticas()).commit();
+        }
+        else if (id == R.id.bitacora){
+            fragment.beginTransaction().replace(R.id.contenedor, new Bitacora()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

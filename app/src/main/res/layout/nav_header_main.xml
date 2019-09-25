@@ -19,7 +19,7 @@
         android:layout_width="102dp"
         android:layout_height="102dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/ic_store" />
+        app:srcCompat="@drawable/store" />
 
     <TextView
         android:textStyle="bold"
