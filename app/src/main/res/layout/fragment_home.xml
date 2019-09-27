@@ -34,7 +34,7 @@
                 android:layout_toLeftOf="@id/log"
                 android:layout_alignParentLeft="true"
                 android:text="@string/app_name"
-                android:id="@+id/negocio_name"
+                android:id="@+id/local"
                 android:textSize="30dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -43,14 +43,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/descripcion"
+                android:id="@+id/direccion"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:layout_marginTop="40dp"
                 android:gravity="center"
-
                 >
             </TextView>
         </RelativeLayout>
@@ -61,7 +60,7 @@
             android:alignmentMode="alignMargins"
             android:columnOrderPreserved="true"
             android:columnCount="2"
-            android:rowCount="10"
+            android:rowCount="3"
             >
             <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
@@ -71,7 +70,8 @@
                 app:cardElevation="6dp"
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
-                android:layout_marginTop="-30dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/user"
                 >
                 <LinearLayout
                     android:orientation="vertical"
@@ -83,20 +83,18 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/store"
+                        android:src="@drawable/user_dash"
                         >
                     </ImageView>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name"
+                        android:text="Usuarios"
                         android:textSize="20dp"
                         android:textColor="@color/colorPrimary"
-
                         >
                     </TextView>
                 </LinearLayout>
-
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -107,7 +105,8 @@
                 app:cardElevation="6dp"
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
-                android:layout_marginTop="-30dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/productos"
                 >
                 <LinearLayout
                     android:orientation="vertical"
@@ -119,20 +118,18 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/store"
+                        android:src="@drawable/productos_dash"
                         >
                     </ImageView>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name"
+                        android:text="Productos"
                         android:textSize="20dp"
                         android:textColor="@color/colorPrimary"
-
                         >
                     </TextView>
                 </LinearLayout>
-
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -142,6 +139,7 @@
                 android:layout_rowWeight="1"
                 app:cardElevation="6dp"
                 app:cardCornerRadius="12dp"
+                android:id="@+id/faltantes"
                 android:layout_margin="12dp"
                 >
                 <LinearLayout
@@ -154,22 +152,99 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/store"
+                        android:src="@drawable/faltantes_dash"
                         >
                     </ImageView>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name"
+                        android:text="Faltantes"
                         android:textSize="20dp"
                         android:textColor="@color/colorPrimary"
-
                         >
                     </TextView>
                 </LinearLayout>
-
             </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp"
+                android:id="@+id/estadisticas"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    >
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/estadisticas_dash"
+                        >
+                    </ImageView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Estadisticas"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        >
+                    </TextView>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="85dp"
+            android:layout_marginRight="85dp"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="true"
+            android:columnCount="2"
+            android:rowCount="1"
+            >
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp"
+                android:id="@+id/bitacora"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    >
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/bitacora_dash"
+                        >
+                    </ImageView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bitácora"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorPrimary"
+                        >
+                    </TextView>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
         </GridLayout>
     </LinearLayout>
 
