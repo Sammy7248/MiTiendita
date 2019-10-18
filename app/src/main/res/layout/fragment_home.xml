@@ -60,17 +60,17 @@
             android:alignmentMode="alignMargins"
             android:columnOrderPreserved="true"
             android:columnCount="2"
-            android:rowCount="3"
+            android:rowCount="2"
             >
             <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
+                android:layout_columnWeight="1.5"
                 android:layout_rowWeight="1"
                 app:cardElevation="6dp"
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
-                android:layout_marginTop="10dp"
+
                 android:id="@+id/user"
                 >
                 <LinearLayout
@@ -105,7 +105,7 @@
                 app:cardElevation="6dp"
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
-                android:layout_marginTop="10dp"
+
                 android:id="@+id/productos"
                 >
                 <LinearLayout
@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                app:cardElevation="6dp"
+                app:cardElevation="12dp"
                 app:cardCornerRadius="12dp"
                 android:id="@+id/faltantes"
                 android:layout_margin="12dp"
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                app:cardElevation="6dp"
+                app:cardElevation="12dp"
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 android:id="@+id/estadisticas"

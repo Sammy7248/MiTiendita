@@ -1,9 +1,11 @@
 package com.navigation.samael_pc.navigation;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,12 +20,15 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Toolbar toolbar;
+    General general;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        general = General.getInstance();
+        setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.contenedor, new Home()).commit();
+        toolbar.setTitle("");
 
     }
 
@@ -62,26 +68,35 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        android.support.v4.app.FragmentManager fragment=getSupportFragmentManager();
+        android.support.v4.app.FragmentManager fragment = getSupportFragmentManager();
 
         if (id == R.id.home) {
+            Log.e("valor de item", String.valueOf(general.item));
             fragment.beginTransaction().replace(R.id.contenedor,new Home()).commit();
-        } else if (id == R.id.usuarios) {
+            toolbar.setTitle("");
+
+        } else if (id == R.id.usuarios || general.item == 1) {
             fragment.beginTransaction().replace(R.id.contenedor,new Usuarios()).commit();
+            toolbar.setTitle(item.getTitle());
         } else if (id == R.id.productos) {
             fragment.beginTransaction().replace(R.id.contenedor,new Productos()).commit();
+            toolbar.setTitle(item.getTitle());
         } else if (id == R.id.faltantes) {
             fragment.beginTransaction().replace(R.id.contenedor,new Faltantes()).commit();
+            toolbar.setTitle(item.getTitle());
         } else if (id == R.id.estadisticas) {
             //Toast.makeText(getApplicationContext(), "Cerrar sesion", Toast.LENGTH_SHORT).show();
             fragment.beginTransaction().replace(R.id.contenedor, new Estadisticas()).commit();
+            toolbar.setTitle(item.getTitle());
         }
         else if (id == R.id.bitacora){
             fragment.beginTransaction().replace(R.id.contenedor, new Bitacora()).commit();
+            toolbar.setTitle(item.getTitle());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 }
