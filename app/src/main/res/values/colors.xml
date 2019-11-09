@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#114B5F</color>
     <color name="colorAccent">#028090</color>
     <color name="white">#FFF</color>
+    <color name="delete_value">#E53935</color>
 </resources>

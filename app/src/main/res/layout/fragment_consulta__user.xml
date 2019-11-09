@@ -17,6 +17,7 @@
             android:id="@+id/search_user"
             android:layout_height="wrap_content"
             android:hint="Buscar"
+            android:textSize="15dp"
             android:textColor="@color/colorPrimary"
             android:layout_margin="10dp"
             android:inputType="text"

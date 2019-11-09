@@ -4,13 +4,27 @@ public class Usuario {
 
     private String username, password, name, apellido;
     private Integer id_local;
+    private boolean is_super_user;
 
-    public Usuario(String username, String password, String name, String apellido, Integer id_local){
+    public Usuario(String username, String password, String name, String apellido, Integer id_local, boolean is_super_user){
         this.username = username;
         this.password = password;
         this.name = name;
         this.apellido = apellido;
         this.id_local = id_local;
+        this.is_super_user = is_super_user;
+    }
+
+    public Usuario(){
+
+    }
+
+    public boolean getIs_super_user() {
+        return is_super_user;
+    }
+
+    public void setIs_super_user(boolean is_super_user) {
+        this.is_super_user = is_super_user;
     }
 
     public String getUsername() {

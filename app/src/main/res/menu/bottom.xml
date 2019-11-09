@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"    >
     <item
         android:icon="@drawable/user"
         android:title="Consultar"
@@ -10,6 +10,7 @@
         android:title="Añadir"
         android:id="@+id/add_user"
         />
+    <!--
     <item
         android:icon="@drawable/ic_delete_user"
         android:title="Eliminar"
@@ -19,6 +20,6 @@
         android:icon="@drawable/ic_mode_edit_user"
         android:title="Editar"
         android:id="@+id/edit_user"
-        />
+        />-->
 
 </menu>

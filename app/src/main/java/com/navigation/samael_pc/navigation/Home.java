@@ -28,8 +28,8 @@ public class Home extends Fragment {
     Button send;
     TextView show_text;
     EditText edit;
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference myChild = reference.child("Mensaje");
+    //DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+    //DatabaseReference myChild = reference.child("Mensaje");
     CardView usuarios, productos, faltantes, estadisticas, bitacora;
     MenuItem item;
     General general;
@@ -102,7 +102,7 @@ public class Home extends Fragment {
         });
         /*-----------------------*/
 
-        reference.addValueEventListener(new ValueEventListener() {
+        general.reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

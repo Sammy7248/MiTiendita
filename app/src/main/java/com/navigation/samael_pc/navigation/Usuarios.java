@@ -46,16 +46,16 @@ public class Usuarios extends Fragment {
                 }
 
                 if(id == R.id.add_user){
-                    Toast.makeText(getActivity(), "Añadir", Toast.LENGTH_LONG).show();
+                    manager.beginTransaction().replace(R.id.cont_user, new Add_user()).commit();
                 }
 
-                if(id == R.id.remove_user){
+                /*if(id == R.id.remove_user){
                     Toast.makeText(getActivity(), "Eliminar", Toast.LENGTH_LONG).show();
                 }
 
                 if(id == R.id.edit_user){
                     Toast.makeText(getActivity(), "Editar", Toast.LENGTH_LONG).show();
-                }
+                }*/
                 return true;
             }
         });
