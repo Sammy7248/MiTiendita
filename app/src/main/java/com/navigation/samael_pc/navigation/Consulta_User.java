@@ -61,7 +61,6 @@ public class Consulta_User extends Fragment {
 
                 for(DataSnapshot user_object: dataSnapshot.getChildren()){
                     Usuario user = user_object.getValue(Usuario.class);
-                    //Log.i("Valor",user.getName());
                     all_users.add(user);
                 }
                 adapter = new UserAdapter(view.getContext(), all_users);

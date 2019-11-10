@@ -5,18 +5,28 @@ public class Usuario {
     private String username, password, name, apellido;
     private Integer id_local;
     private boolean is_super_user;
+    String key;
 
-    public Usuario(String username, String password, String name, String apellido, Integer id_local, boolean is_super_user){
+    public Usuario(String username, String password, String name, String apellido, Integer id_local, boolean is_super_user, String key){
         this.username = username;
         this.password = password;
         this.name = name;
         this.apellido = apellido;
         this.id_local = id_local;
         this.is_super_user = is_super_user;
+        this.key = key;
     }
 
     public Usuario(){
 
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public boolean getIs_super_user() {

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class Add_user extends Fragment {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Usuario user = new Usuario(username.getText().toString(), password.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), 1, false);
+
                 if(username.getText().toString().isEmpty()){
                     username.setError("Vacio");
                 }
@@ -54,14 +55,17 @@ public class Add_user extends Fragment {
                     confirm_password.setError("Vacio");
                 }
                 if(password.getText().toString().equals(confirm_password.getText().toString())){
-                    child.push().setValue(user);
+                    String key = general.reference.push().getKey();
+                    Usuario user = new Usuario(username.getText().toString(), password.getText().toString(), nombre.getText().toString(), apellido.getText().toString(), 1, false,key);
+                    //child(key).
+                    child.child(user.getKey()).setValue(user);
                     username.setText("");
                     password.setText("");
                     nombre.setText("");
                     apellido.setText("");
                     username.requestFocus();
                     confirm_password.setText("");
-                    Toast.makeText(v.getContext(), "Usuario registrado correctamente", Toast.LENGTH_LONG).show();
+                    Toast.makeText(v.getContext(), "Usuario registrado correctamente"+key, Toast.LENGTH_LONG).show();
                 }
                 else{
                     Toast.makeText(view.getContext(), "Las contraseñas no son iguales", Toast.LENGTH_LONG).show();

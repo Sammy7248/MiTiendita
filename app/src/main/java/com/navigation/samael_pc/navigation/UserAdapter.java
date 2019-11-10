@@ -1,13 +1,23 @@
 package com.navigation.samael_pc.navigation;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -33,8 +43,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(final UserViewHolder holder, int position) {
 
-        Usuario user = list.get(position);
+        final Usuario user = list.get(position);
         String su= "";
+        final General general = General.getInstance();
+
         if(user.getIs_super_user() == true){
             su = "Si";
         }
@@ -50,6 +62,40 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), holder.username.getText(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        holder.edit_value.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(myContext);
+                LayoutInflater inflate = LayoutInflater.from(v.getContext());
+                View view = inflate.inflate(R.layout.delete_confirm,null);
+                dialog.setView(view);
+                dialog.create().show();
+
+
+                TextView delete, no_delete;
+                delete = view.findViewById(R.id.delete);
+                no_delete = view.findViewById(R.id.no_delete);
+
+
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(v.getContext(), "Delete...", Toast.LENGTH_LONG).show();
+                        Log.i("Key",user.getKey());
+                        general.reference.child("Usuarios").child(user.getKey()).removeValue();
+                    }
+                });
+
+                no_delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
             }
         });
 

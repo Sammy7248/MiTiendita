@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_product"
+        app:cardCornerRadius="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="2dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textSize="20dp"
+               android:layout_marginLeft="10dp"
+               android:text="Producto"
+               android:id="@+id/header"
+               android:gravity="center"
+               android:background="@color/colorPrimary"
+               android:textColor="@color/white"
+               android:textStyle="bold"
+               >
+           </TextView>
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/image"
+                android:layout_below="@id/header"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+
+                >
+
+            </ImageView>
+
+            <TextView
+                android:layout_toRightOf="@+id/image"
+                android:layout_below="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/producto_name"
+                android:text="Producto"
+                android:textSize="15dp"
+                >
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/price"
+                android:text="Precio"
+                android:layout_toRightOf="@+id/image"
+                android:layout_below="@+id/producto_name"
+                android:textSize="15dp"
+                >
+            </TextView>
+
+            <TextView
+                android:layout_toRightOf="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Caducidad"
+                android:id="@+id/expiration"
+                android:layout_below="@id/price"
+                android:textSize="15dp"
+                >
+            </TextView>
+
+            <TextView
+                android:layout_toRightOf="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Existencia"
+                android:id="@+id/existence"
+                android:layout_below="@+id/expiration"
+                android:textSize="15dp"
+                >
+            </TextView>
+
+            <TextView
+                android:layout_toRightOf="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/area"
+                android:text="Area"
+                android:layout_below="@+id/existence"
+                android:textSize="15dp"
+                >
+            </TextView>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

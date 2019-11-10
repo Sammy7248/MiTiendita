@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/cont_user"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:design="http://schemas.android.com/apk/res-auto"
     tools:context=".Usuarios">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:text="usuarios"
-        >
-    </TextView>
-
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:id="@+id/botnav"
         design:menu="@menu/bottom"
-        android:background="@color/white"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
         >
     </android.support.design.widget.BottomNavigationView>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

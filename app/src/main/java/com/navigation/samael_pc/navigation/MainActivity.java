@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.contenedor, new Home()).commit();
+        manager.beginTransaction().replace(R.id.contenedor, new Productos()).commit();
         toolbar.setTitle("");
 
     }
@@ -70,12 +70,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         android.support.v4.app.FragmentManager fragment = getSupportFragmentManager();
 
-        if (id == R.id.home) {
+        /*if (id == R.id.home) {
             Log.e("valor de item", String.valueOf(general.item));
             fragment.beginTransaction().replace(R.id.contenedor,new Home()).commit();
             toolbar.setTitle("");
 
-        } else if (id == R.id.usuarios || general.item == 1) {
+        } else */
+        if (id == R.id.usuarios || general.item == 1) {
             fragment.beginTransaction().replace(R.id.contenedor,new Usuarios()).commit();
             toolbar.setTitle(item.getTitle());
         } else if (id == R.id.productos) {
