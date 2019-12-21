@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout
     android:orientation="vertical"
-    android:background="@color/white"
-    tools:context=".Add_user">
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registrar Usuario"
+        android:text="Agregar Producto"
         android:textSize="25dp"
         android:gravity="center"
         android:layout_margin="5dp"
@@ -27,13 +24,13 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre (s)"
+            android:hint="Nombre"
             android:layout_margin="10dp"
-            android:id="@+id/name"
+            android:id="@+id/name_product"
             android:inputType="text"
             android:textSize="15dp"
             android:textColor="@color/colorPrimary"
-            android:drawableRight="@drawable/ic_mode_edit_user"
+            android:drawableRight="@drawable/ic_products"
             >
         </android.support.design.widget.TextInputEditText>
     </android.support.design.widget.TextInputLayout>
@@ -45,12 +42,12 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Apellido (s)"
+            android:hint="Contenido Neto"
             android:layout_margin="10dp"
             android:textSize="15dp"
             android:inputType="text"
-            android:id="@+id/apellido_user"
-            android:drawableRight="@drawable/ic_apellido"
+            android:id="@+id/contenido"
+            android:drawableRight="@drawable/ic_conten"
             android:textColor="@color/colorPrimary"
             >
         </android.support.design.widget.TextInputEditText>
@@ -62,18 +59,54 @@
         >
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/username"
+            android:id="@+id/bar_codes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:drawableRight="@drawable/ic_users"
-            android:hint="E-Mail"
+            android:drawableRight="@drawable/ic_contained"
+            android:hint="Codigo De Barras"
             android:textColor="@color/colorPrimary"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             android:textSize="15dp"></android.support.design.widget.TextInputEditText>
 
     </android.support.design.widget.TextInputLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Area"
+        android:layout_margin="10dp"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimary"
+        >
+    </TextView>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/area"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+
+    </Spinner>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Caducidad"
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:inputType="date"
+        android:textColor="@color/colorPrimaryDark"
+        android:id="@+id/caducidad"
+        android:textSize="15dp"
+        android:drawableEnd="@drawable/ic_date"
+        >
+    </TextView>
+
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,12 +114,12 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
-            android:drawableRight="@drawable/ic_remove_red_eye_black_24dp"
+            android:hint="Total En Existencia"
+            android:drawableRight="@drawable/ic_exists"
             android:layout_margin="10dp"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:textColor="@color/colorPrimary"
-            android:id="@+id/user_password"
+            android:id="@+id/existencia"
             android:textSize="15dp"
             >
         </android.support.design.widget.TextInputEditText>
@@ -99,12 +132,12 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Confirmar Password"
-            android:drawableRight="@drawable/ic_security"
+            android:hint="Precio"
+            android:drawableRight="@drawable/ic_value"
             android:layout_margin="10dp"
-            android:inputType="textPassword"
+            android:inputType="date"
             android:textColor="@color/colorPrimary"
-            android:id="@+id/user_confirm_password"
+            android:id="@+id/precio"
             android:textSize="15dp"
             >
         </android.support.design.widget.TextInputEditText>
@@ -113,14 +146,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registrar"
+        android:text="Agregar"
         android:textSize="15dp"
         android:layout_margin="10dp"
         android:gravity="center"
         android:textColor="@color/colorPrimary"
-        android:id="@+id/user_register"
+        android:id="@+id/add_product"
         >
     </TextView>
 
-    <!--String username, String password, String name, String apellido, Integer -->
+
 </LinearLayout>

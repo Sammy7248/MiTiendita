@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Productos">
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
@@ -17,6 +17,7 @@
             android:paddingRight="20dp"
             android:paddingLeft="40dp"
             android:paddingTop="10dp"
+            android:id="@+id/presentation"
             android:layout_width="match_parent"
             android:layout_height="110dp">
             <ImageView
@@ -53,11 +54,36 @@
             </TextView>
         </RelativeLayout>
         <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/presentation"
             android:layout_width="match_parent"
             android:id="@+id/recycler_productos"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
-    </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_alignBottom="@+id/recycler_productos"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="20dp"
+            >
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabSize="normal"
+                android:src="@drawable/fab_add"
+                android:backgroundTint="@color/colorPrimary"
+                android:id="@+id/add_prod"
+                >
+
+            </android.support.design.widget.FloatingActionButton>
+        </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>
