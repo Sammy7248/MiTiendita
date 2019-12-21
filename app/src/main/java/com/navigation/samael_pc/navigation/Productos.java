@@ -9,11 +9,13 @@ import android.graphics.Color;
 import android.graphics.Interpolator;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +28,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
+
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Hashtable;
 
 
 public class Productos extends Fragment {
@@ -41,33 +53,60 @@ public class Productos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_productos, container, false);
+        final View view_frag = inflater.inflate(R.layout.fragment_productos, container, false);
 
-        recycler_product = view.findViewById(R.id.recycler_productos);
-        recycler_product.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recycler_product = view_frag.findViewById(R.id.recycler_productos);
+        recycler_product.setLayoutManager(new LinearLayoutManager(view_frag.getContext()));
         product_list = new ArrayList<>();
 
-        product_list.add(new Producto("Jabon Zezt", "150g","7506306238336","22/12/2019","Papeleria",20,12.50));
-        product_list.add(new Producto("Jabon Zezt", "150g","7506306238336","22/12/2019","Abarrotes",20,12.50));
-        product_list.add(new Producto("Jabon Zezt", "150g","7506306238336","22/12/2019","Ropa",20,12.50));
-        product_list.add(new Producto("Jabon Zezt", "150g","7506306238336","22/12/2019","Abarrotes",20,12.50));
-        product_list.add(new Producto("Jabon Zezt", "150g","7506306238336","22/12/2019","Papeleria",20,12.50));
+        final General gen = General.getInstance();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Productos");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot product_obj:dataSnapshot.getChildren()){
+                    Producto prod = product_obj.getValue(Producto.class);
+                    product_list.add(prod);
+                }
+                adapter = new ProductAdapter(view_frag.getContext(), product_list);
+                recycler_product.setAdapter(adapter);
+            }
 
-        adapter = new ProductAdapter(view.getContext(), product_list);
-        recycler_product.setAdapter(adapter);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        add_prod = view.findViewById(R.id.add_prod);
+            }
+        });
+
+
+        add_prod = view_frag.findViewById(R.id.add_prod);
 
         add_prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(view.getContext());
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(view_frag.getContext());
                 LayoutInflater inflate = LayoutInflater.from(v.getContext());
-                View view = inflate.inflate(R.layout.add_product,null);
+                final View view = inflate.inflate(R.layout.add_product,null);
                 dialog.setView(view);
                 dialog.create().show();
 
+                final Hashtable<Integer, String> meses = new Hashtable<>();
+                meses.put(1,"Enero");
+                meses.put(2,"Febrero");
+                meses.put(3,"Marzo");
+                meses.put(4,"Abril");
+                meses.put(5,"MAyo");
+                meses.put(6,"Junio");
+                meses.put(7,"Julio");
+                meses.put(8,"Agosto");
+                meses.put(9,"Septiembre");
+                meses.put(10,"Octubre");
+                meses.put(11,"Noviembre");
+                meses.put(12,"Diciembre");
+
                 final TextView caducidad = view.findViewById(R.id.caducidad);
+                TextView register_prod = view.findViewById(R.id.register_prod);
+                final DatabaseReference child = gen.reference.child("Productos");
 
                 final Spinner area = view.findViewById(R.id.area);
                 ArrayList<String> areas = new ArrayList();
@@ -78,6 +117,7 @@ public class Productos extends Fragment {
                 ArrayAdapter adapter = new ArrayAdapter(getContext(),android.R.layout.simple_dropdown_item_1line,areas);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 area.setAdapter(adapter);
+
 
                 area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -100,14 +140,17 @@ public class Productos extends Fragment {
                                 DatePickerDialog dpc = new DatePickerDialog(getContext(), R.style.DialogTheme ,new DatePickerDialog.OnDateSetListener() {
                                     @Override
                                     public void onDateSet(DatePicker view, int year, int month, int day) {
-                                        Toast.makeText(getContext(), String.valueOf(year+"/"+month+"/"+day),Toast.LENGTH_LONG).show();
+                                        gen.caducidad = String.format("%d/%s/%d",day, meses.get(month+1),year);
+                                        caducidad.setText(String.format("%d/%s/%d",day, meses.get(month+1),year));
+                                        //Toast.makeText(getContext(), String.valueOf(year+"/"+month+"/"+day),Toast.LENGTH_LONG).show();
                                     }
-                                },day,month,year);
+                                },year,month,day);
 
                                 dpc.show();
                             }
 
                         });
+                        gen.area = area.getSelectedItem().toString().trim();
                         //Toast.makeText(getContext(),String.valueOf(area.getSelectedItem().toString()), Toast.LENGTH_LONG).show();
                     }
 
@@ -116,8 +159,50 @@ public class Productos extends Fragment {
 
                     }
                 });
+
+
+                register_prod.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            String key_producto = gen.reference.push().getKey();
+                            EditText name_product = view.findViewById(R.id.name_product);
+                            EditText contenido = view.findViewById(R.id.contenido);
+                            EditText bar_code = view.findViewById(R.id.bar_codes);
+                            Toast.makeText(getContext(), String.valueOf(gen.area+"-"+gen.caducidad),Toast.LENGTH_LONG).show();
+                            EditText existencia = view.findViewById(R.id.existencia);
+                            EditText precio = view.findViewById(R.id.precio);
+                            if (!name_product.getText().toString().isEmpty() && !existencia.getText().toString().isEmpty()){
+                                child.child(key_producto).setValue(new Producto(name_product.getText().toString(), contenido.getText().toString(),
+                                        bar_code.getText().toString(), gen.caducidad,
+                                        gen.area, Integer.parseInt(existencia.getText().toString()),
+                                        Double.parseDouble(precio.getText().toString()), key_producto));
+                                name_product.setText("");
+                                contenido.setText("");
+                                bar_code.setText("");
+                                existencia.setText("");
+                                precio.setText("");
+                                gen.area = "Abarrotes";
+                                gen.caducidad = "";
+                                caducidad.setText("Caducidad");
+                                Toast.makeText(getContext(), "Producto registrado exitosamente!!!",Toast.LENGTH_LONG).show();
+
+                            }
+                            else{
+                                name_product.setError("Vacio");
+                                existencia.setError("Vacio");
+                                Toast.makeText(getContext(),"Campos vacios, verifique por favor!!!",Toast.LENGTH_LONG).show();
+                            }
+                        }catch (Exception e){
+                            Toast.makeText(getContext(), String.valueOf(e),Toast.LENGTH_LONG).show();
+                            Log.e("Error",String.valueOf(e));
+                        }
+
+                        //child.child(key_producto).setValue("");
+                    }
+                });
             }
         });
-        return view;
+        return view_frag;
     }
 }

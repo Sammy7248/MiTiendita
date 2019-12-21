@@ -6,8 +6,11 @@ public class Producto {
     String nombre, contenido_neto, codigo_barras, caducidad, area;
     int total_existencia;
     Double precio;
+    String key_product;
 
-    public Producto(String nombre, String contenido_neto, String codigo_barras, String caducidad, String area, int total_existencia, Double precio) {
+
+
+    public Producto(String nombre, String contenido_neto, String codigo_barras, String caducidad, String area, int total_existencia, Double precio, String key_product) {
         this.nombre = nombre;
         this.contenido_neto = contenido_neto;
         this.codigo_barras = codigo_barras;
@@ -15,6 +18,7 @@ public class Producto {
         this.area = area;
         this.total_existencia = total_existencia;
         this.precio = precio;
+        this.key_product = key_product;
     }
 
     public Producto(){
@@ -75,5 +79,13 @@ public class Producto {
 
     public void setTotal_existencia(int total_existencia) {
         this.total_existencia = total_existencia;
+    }
+
+    public String getKey_product() {
+        return key_product;
+    }
+
+    public void setKey_product(String key_product) {
+        this.key_product = key_product;
     }
 }

@@ -6,6 +6,8 @@ import com.google.firebase.database.FirebaseDatabase;
 class General {
 
     private static final General ourInstance = new General();
+    public String area = "Abarrotes";
+    public String caducidad = "";
     //Firebase conecction variables
     public DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     public DatabaseReference myChild = reference.child("Mensaje");

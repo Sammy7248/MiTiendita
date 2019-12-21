@@ -36,11 +36,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
         Producto product = product_list.get(position);
 
-        holder.product_name.setText(product.getNombre().toString());
-        holder.price.setText(product.getPrecio().toString());
-        holder.expiration.setText(product.getCaducidad().toString());
-        holder.existence.setText(String.valueOf(product.getTotal_existencia()).toString());
-        holder.area.setText(product.getArea().toString());
+        holder.product_name.setText("Producto: "+product.getNombre().toString());
+        holder.price.setText("Precio: $"+product.getPrecio().toString());
+        holder.expiration.setText("Fecha De Caducidad: "+product.getCaducidad().toString());
+        holder.existence.setText("Existencia: "+String.valueOf(product.getTotal_existencia()).toString());
+        holder.area.setText("Area: "+product.getArea().toString());
 
         if(product.area.toString().equals("Abarrotes")){
             holder.image.setImageResource(R.drawable.abarrotes);

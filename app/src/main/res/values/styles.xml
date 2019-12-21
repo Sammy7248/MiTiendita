@@ -24,4 +24,8 @@
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
+    <style name="DialogThemeFalt" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/delete_value</item>
+    </style>
+
 </resources>

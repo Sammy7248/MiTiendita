@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Faltantes">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="Fecha"
+        android:gravity="center"
+        android:drawableEnd="@drawable/ic_date"
+        android:layout_margin="10dp"
+        android:textSize="20dp"
+        android:textColor="@color/delete_value"
+        android:id="@+id/filter_date"
+        >
 
-</FrameLayout>
+    </TextView>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_faltantes"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
