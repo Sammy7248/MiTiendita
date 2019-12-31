@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,7 @@ public class Consulta_User extends Fragment {
     UserAdapter adapter;
     General general = General.getInstance();
     ArrayList<Usuario> all_users;
+    SearchView search_user;
 
     public Consulta_User() {
         // Required empty public constructor
@@ -48,6 +50,7 @@ public class Consulta_User extends Fragment {
         recycler_user = view.findViewById(R.id.recycler_users);
         //recycler_user.setHasFixedSize(true);
         recycler_user.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        search_user = view.findViewById(R.id.search_user);
         final ArrayList<Usuario> users = new ArrayList<>();
         //Se hace la referencia al objeto de la bd
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -71,6 +74,19 @@ public class Consulta_User extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        search_user.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
             }
         });
 

@@ -2,16 +2,17 @@ package com.navigation.samael_pc.navigation;
 
 public class Bitacora_Obj {
 
-    String Area, Fecha, Accion, Modulo, Usuario, KeyReg;
+    String Area, Fecha, Hora, Accion, Modulo, Usuario, KeyReg;
     int Local;
 
     public Bitacora_Obj(){
 
     }
 
-    public Bitacora_Obj(String area, String fecha, String accion, String modulo, String usuario, String keyReg, int local) {
+    public Bitacora_Obj(String area, String fecha, String hora, String accion, String modulo, String usuario, String keyReg, int local) {
         Area = area;
         Fecha = fecha;
+        Hora = hora;
         Accion = accion;
         Modulo = modulo;
         Usuario = usuario;
@@ -33,6 +34,14 @@ public class Bitacora_Obj {
 
     public void setFecha(String fecha) {
         Fecha = fecha;
+    }
+
+    public String getHora() {
+        return Hora;
+    }
+
+    public void setHora(String hora) {
+        Hora = hora;
     }
 
     public String getAccion() {

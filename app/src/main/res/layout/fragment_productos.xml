@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 app:fabSize="normal"
                 android:src="@drawable/fab_add"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:id="@+id/add_prod"
                 >
 

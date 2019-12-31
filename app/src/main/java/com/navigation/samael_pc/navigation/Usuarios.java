@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 
@@ -25,6 +26,7 @@ public class Usuarios extends Fragment {
 
     BottomNavigationView botnav;
     FragmentManager manager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class Usuarios extends Fragment {
         manager = getFragmentManager();
         botnav = view.findViewById(R.id.botnav);
         manager.beginTransaction().replace(R.id.cont_user, new Consulta_User()).commit();
+        //search_user = view.findViewById(R.id.search_user);
 
         botnav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -59,6 +62,8 @@ public class Usuarios extends Fragment {
                 return true;
             }
         });
+
+
 
 
         return view;

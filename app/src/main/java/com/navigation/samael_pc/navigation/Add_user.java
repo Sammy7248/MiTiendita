@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -36,7 +37,7 @@ public class Add_user extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_add_user, container, false);
-        child = general.reference.child("Usuarios");
+        child = FirebaseDatabase.getInstance().getReference("Usuarios");
         username = view.findViewById(R.id.username);
         password = view.findViewById(R.id.user_password);
         nombre = view.findViewById(R.id.name);
@@ -67,18 +68,19 @@ public class Add_user extends Fragment {
                     //password.getText().toString().equals(confirm_password.getText().toString())
                     if(password.getText().toString().equals(confirm_password.getText().toString())){
                         try {
-                            String key = general.reference.push().getKey();
+                            String key = child.push().getKey();
                             String pass = null;
                             pass = encriptar(password.getText().toString());
-                            Usuario user = new Usuario(username.getText().toString(), pass, nombre.getText().toString(), apellido.getText().toString(), 1, false,key);
+                            Usuario user = new Usuario(username.getText().toString(), pass, nombre.getText().toString(), apellido.getText().toString(), 1, false,key, general.fecha.toString(), general.hour.toString());
                             //child(key).
-                            child.child(user.getKey()).setValue(user);
+                            child.child(key).setValue(user);
                             username.setText("");
                             password.setText("");
                             nombre.setText("");
                             apellido.setText("");
                             username.requestFocus();
                             confirm_password.setText("");
+                            nombre.setFocusable(true);
                             Toast.makeText(v.getContext(), "Usuario registrado correctamente"+key, Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -97,6 +99,7 @@ public class Add_user extends Fragment {
                     apellido.setText("");
                     username.requestFocus();
                     confirm_password.setText("");
+                    nombre.setFocusable(true);
                     Toast.makeText(view.getContext(), "Usuario no registrado, campos incorrectos", Toast.LENGTH_LONG).show();
                 }
             }

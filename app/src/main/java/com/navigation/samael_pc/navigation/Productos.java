@@ -104,7 +104,7 @@ public class Productos extends Fragment {
                 meses.put(2,"Febrero");
                 meses.put(3,"Marzo");
                 meses.put(4,"Abril");
-                meses.put(5,"MAyo");
+                meses.put(5,"Mayo");
                 meses.put(6,"Junio");
                 meses.put(7,"Julio");
                 meses.put(8,"Agosto");
@@ -199,15 +199,11 @@ public class Productos extends Fragment {
 
                                 //OBTENER FECHA Y HORA ACTUALES
 
-                                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a", Locale.getDefault());
-                                Date date = new Date();
-
-                                String fecha = format.format(date);
 
 
 
                                 DatabaseReference ref_bit = FirebaseDatabase.getInstance().getReference("Bitacora");
-                                Bitacora_Obj obj_bit = new Bitacora_Obj("Abarrotes",fecha, "Agregar Producto", "A", "manuel@hotmail.com",ref_bit.push().getKey().toString(),2);
+                                Bitacora_Obj obj_bit = new Bitacora_Obj("Abarrotes",gen.fecha, gen.hour, "Agregar Producto", "A", "manuel@hotmail.com",ref_bit.push().getKey().toString(),2);
                                 ref_bit.child(ref_bit.push().getKey()).setValue(obj_bit);
                             }
                             else{

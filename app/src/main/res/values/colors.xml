@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00578E</color>
-    <color name="colorPrimaryDark">#114B5F</color>
-    <color name="colorAccent">#028090</color>
-    <color name="white">#FFF</color>
+    <color name="colorPrimary">#B81B57</color>
+    <color name="colorPrimaryDark">#521F68</color>
+    <color name="colorAccent">#1B42CB</color>
+    <color name="white">#F7F7F7</color>
     <color name="delete_value">#E53935</color>
     <color name="gray_black">#212121</color>
 </resources>

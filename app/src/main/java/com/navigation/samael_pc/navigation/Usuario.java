@@ -6,8 +6,9 @@ public class Usuario {
     private Integer id_local;
     private boolean is_super_user;
     String key;
+    String Fecha, Hora;
 
-    public Usuario(String username, String password, String name, String apellido, Integer id_local, boolean is_super_user, String key){
+    public Usuario(String username, String password, String name, String apellido, Integer id_local, boolean is_super_user, String key, String Fecha, String Hora){
         this.username = username;
         this.password = password;
         this.name = name;
@@ -15,6 +16,24 @@ public class Usuario {
         this.id_local = id_local;
         this.is_super_user = is_super_user;
         this.key = key;
+        this.Hora = Hora;
+        this.Fecha = Fecha;
+    }
+
+    public String getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(String fecha) {
+        Fecha = fecha;
+    }
+
+    public String getHora() {
+        return Hora;
+    }
+
+    public void setHora(String hora) {
+        Hora = hora;
     }
 
     public Usuario(){

@@ -1,31 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Faltantes">
 
-    <TextView
+    <!-- <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Fecha"
+         android:gravity="center"
+         android:drawableEnd="@drawable/ic_date"
+         android:layout_margin="10dp"
+         android:textSize="20dp"
+         android:textColor="@color/delete_value"
+         android:id="@+id/filter_date"
+         >
+
+     </TextView>
+
+
+     <android.support.v7.widget.RecyclerView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:id="@+id/recycler_faltantes"
+         >
+
+     </android.support.v7.widget.RecyclerView>-->
+
+    <ListView
+        android:id="@+id/list_falt"
+        android:layout_weight=".6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fecha"
-        android:gravity="center"
-        android:drawableEnd="@drawable/ic_date"
-        android:layout_margin="10dp"
-        android:textSize="20dp"
-        android:textColor="@color/delete_value"
-        android:id="@+id/filter_date"
-        >
+        android:layout_height="match_parent">
 
-    </TextView>
+    </ListView>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycler_faltantes"
-        >
 
-    </android.support.v7.widget.RecyclerView>
+   <android.support.design.widget.FloatingActionButton
+       android:layout_alignParentEnd="true"
+       android:layout_alignParentBottom="true"
+       android:layout_margin="10dp"
+       android:id="@+id/gen_rep"
+       android:src="@drawable/ic_report"
+       android:backgroundTint="@color/colorPrimaryDark"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
 
-</LinearLayout>
+   </android.support.design.widget.FloatingActionButton>
+
+
+
+</RelativeLayout>

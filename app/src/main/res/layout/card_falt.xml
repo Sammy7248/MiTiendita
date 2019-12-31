@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--<TextView
+                android:text="Area"
+                android:textSize="20dp"
+                android:layout_margin="5dp"
+                android:textColor="@color/gray_black"
+                android:id="@+id/area"
+                android:textStyle="bold|italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>-->
+
+            <LinearLayout
+                android:weightSum="1"
+                android:layout_below="@+id/area"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Producto"
+                    android:layout_weight=".9"
+                    android:textColor="@color/gray_black"
+                    android:textSize="20dp"
+                    android:textStyle="italic"
+                    android:id="@+id/name_falt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <TextView
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:text="+"
+                    android:layout_weight=".1"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:id="@+id/add_falt"
+                    android:background="@color/colorPrimary"
+                    android:layout_width="20dp"
+                    android:layout_height="30dp">
+
+                </TextView>
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
