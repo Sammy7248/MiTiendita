@@ -19,12 +19,12 @@
             android:paddingTop="10dp"
             android:id="@+id/presentation"
             android:layout_width="match_parent"
-            android:layout_height="110dp">
+            android:layout_height="80dp">
             <ImageView
                 android:id="@+id/log"
                 android:layout_alignParentRight="true"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:src="@drawable/user"
                 ></ImageView>
@@ -35,7 +35,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="@string/app_name"
                 android:id="@+id/local"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 >
@@ -46,19 +46,41 @@
                 android:id="@+id/direccion"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="10dp"
                 android:textStyle="bold"
                 android:layout_marginTop="40dp"
                 android:gravity="center"
                 >
             </TextView>
         </RelativeLayout>
-        <android.support.v7.widget.RecyclerView
+
+        <SearchView
             android:layout_below="@+id/presentation"
             android:layout_width="match_parent"
-            android:id="@+id/recycler_productos"
+            android:id="@+id/search_prod"
+            android:layout_height="wrap_content"
+            android:queryHint="Buscar..."
+            android:iconifiedByDefault="false"
+            >
+        </SearchView>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_below="@+id/search_prod"
+            android:layout_width="match_parent"
+            android:id="@+id/ref_prod"
             android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@+id/search_prod"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:id="@+id/recycler_productos"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
 
 
 
@@ -66,8 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_alignBottom="@+id/recycler_productos"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_margin="20dp"
             >

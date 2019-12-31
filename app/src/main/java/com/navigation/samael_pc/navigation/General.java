@@ -8,6 +8,7 @@ class General {
     private static final General ourInstance = new General();
     public String area = "Abarrotes";
     public String caducidad = "";
+    String usario="";
     //Firebase conecction variables
     public DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     public DatabaseReference myChild = reference.child("Mensaje");

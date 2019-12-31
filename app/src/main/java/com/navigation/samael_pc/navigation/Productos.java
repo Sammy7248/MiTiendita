@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,9 +39,12 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.io.Console;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Hashtable;
+import java.util.Locale;
 
 
 public class Productos extends Fragment {
@@ -48,6 +53,8 @@ public class Productos extends Fragment {
     ProductAdapter adapter;
     ArrayList<Producto> product_list;
     FloatingActionButton add_prod;
+    SearchView search_prod;
+    SwipeRefreshLayout ref_prod;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,9 +65,11 @@ public class Productos extends Fragment {
         recycler_product = view_frag.findViewById(R.id.recycler_productos);
         recycler_product.setLayoutManager(new LinearLayoutManager(view_frag.getContext()));
         product_list = new ArrayList<>();
+        search_prod = view_frag.findViewById(R.id.search_prod);
+        ref_prod = view_frag.findViewById(R.id.ref_prod);
 
         final General gen = General.getInstance();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Productos");
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Productos");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -187,8 +196,22 @@ public class Productos extends Fragment {
                                 caducidad.setText("Caducidad");
                                 Toast.makeText(getContext(), "Producto registrado exitosamente!!!",Toast.LENGTH_LONG).show();
 
+
+                                //OBTENER FECHA Y HORA ACTUALES
+
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a", Locale.getDefault());
+                                Date date = new Date();
+
+                                String fecha = format.format(date);
+
+
+
+                                DatabaseReference ref_bit = FirebaseDatabase.getInstance().getReference("Bitacora");
+                                Bitacora_Obj obj_bit = new Bitacora_Obj("Abarrotes",fecha, "Agregar Producto", "A", "manuel@hotmail.com",ref_bit.push().getKey().toString(),2);
+                                ref_bit.child(ref_bit.push().getKey()).setValue(obj_bit);
                             }
                             else{
+
                                 name_product.setError("Vacio");
                                 existencia.setError("Vacio");
                                 Toast.makeText(getContext(),"Campos vacios, verifique por favor!!!",Toast.LENGTH_LONG).show();
@@ -203,6 +226,32 @@ public class Productos extends Fragment {
                 });
             }
         });
+
+        search_prod.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Toast.makeText(getContext(), String.valueOf(newText), Toast.LENGTH_LONG).show();
+                //ref.orderByChild("nombre").startAt(newText)
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        ref_prod.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //adapter = new ProductAdapter(view_frag.getContext(), product_list);
+                //recycler_product.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                ref_prod.setRefreshing(false);
+            }
+        });
+
         return view_frag;
     }
 }

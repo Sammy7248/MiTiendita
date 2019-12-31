@@ -54,10 +54,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             su = "No";
         }
         //holder.apellido.setText(user.getApellido().toString());
-        holder.username.setText("Username: "+user.getUsername().toString().toLowerCase());
-        holder.name.setText("Nombre: "+user.getName().toString() + " " + user.getApellido());
-        holder.local.setText("Local: "+user.getId_local().toString());
-        holder.super_user.setText("SuperUsuario: " + su );
+        holder.username.setText(user.getUsername().toString().toLowerCase());
+        holder.name.setText(user.getName().toString() + " " + user.getApellido());
+        holder.local.setText(user.getId_local().toString());
+        holder.super_user.setText( su );
         holder.delete_value.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +109,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     class UserViewHolder extends RecyclerView.ViewHolder {
 
         TextView username, name, local, super_user;
-        ImageView delete_value, edit_value;
+        TextView delete_value, edit_value;
 
 
         public UserViewHolder(View itemView) {
