@@ -75,7 +75,9 @@ public class Productos extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot product_obj:dataSnapshot.getChildren()){
                     Producto prod = product_obj.getValue(Producto.class);
-                    product_list.add(prod);
+                    if(prod.total_existencia>0){
+                        product_list.add(prod);
+                    }
                 }
                 adapter = new ProductAdapter(view_frag.getContext(), product_list);
                 recycler_product.setAdapter(adapter);
@@ -197,14 +199,9 @@ public class Productos extends Fragment {
                                 Toast.makeText(getContext(), "Producto registrado exitosamente!!!",Toast.LENGTH_LONG).show();
 
 
-                                //OBTENER FECHA Y HORA ACTUALES
-
-
-
-
-                                DatabaseReference ref_bit = FirebaseDatabase.getInstance().getReference("Bitacora");
-                                Bitacora_Obj obj_bit = new Bitacora_Obj("Abarrotes",gen.fecha, gen.hour, "Agregar Producto", "A", "manuel@hotmail.com",ref_bit.push().getKey().toString(),2);
-                                ref_bit.child(ref_bit.push().getKey()).setValue(obj_bit);
+                                String bit_key = gen.bitacora.push().getKey();
+                                Bitacora_Obj obj_bit = new Bitacora_Obj("Productos",gen.fecha, gen.hour, "Agregó Producto", "A", gen.usario,bit_key,gen.local);
+                                gen.bitacora.child(bit_key).setValue(obj_bit);
                             }
                             else{
 

@@ -52,15 +52,13 @@ public class Consulta_User extends Fragment {
         recycler_user.setLayoutManager(new LinearLayoutManager(view.getContext()));
         search_user = view.findViewById(R.id.search_user);
         final ArrayList<Usuario> users = new ArrayList<>();
-        //Se hace la referencia al objeto de la bd
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("Usuarios");
 
-        //Query query = ref.child("Samael");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //Usuario user = dataSnapshot.getValue(Usuario.class);
 
                 for(DataSnapshot user_object: dataSnapshot.getChildren()){
                     Usuario user = user_object.getValue(Usuario.class);

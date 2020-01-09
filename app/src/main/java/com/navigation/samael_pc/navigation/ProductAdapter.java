@@ -1,14 +1,17 @@
 package com.navigation.samael_pc.navigation;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,15 +42,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     @Override
     public void onBindViewHolder(ProductAdapter.ProductHolder holder, int position) {
 
-        Producto product = product_list.get(position);
+        final Producto product = product_list.get(position);
 
-        holder.product_name.setText("Producto: "+product.getNombre().toString());
-        holder.price.setText("Precio: $"+product.getPrecio().toString());
-        holder.expiration.setText("Fecha De Caducidad: "+product.getCaducidad().toString());
+        holder.product_name.setText("Producto: "+product.getNombre().toString() + " " + product.getContenido_neto());
+        holder.price.setText("Precio: $"+product.getPrecio().toString()+"0");
+        holder.expiration.setText(product.getCaducidad().toString());
         holder.existence.setText("Existencia: "+String.valueOf(product.getTotal_existencia()).toString());
         holder.area.setText("Area: "+product.getArea().toString());
 
-        if(product.area.toString().equals("Abarrotes")){
+        if(product.area.equals("Papeleria") || product.area.equals("Ropa")){
+            holder.expiration.setVisibility(View.INVISIBLE);
+        }
+        else{
+            holder.expiration.setVisibility(View.VISIBLE);
+        }
+        char[] nam = product.nombre.toCharArray();
+        holder.image.setText(String.valueOf(nam[0]));
+        /*if(product.area.toString().equals("Abarrotes")){
             holder.image.setImageResource(R.drawable.abarrotes);
         }
         if(product.area.toString().equals("Papeleria")){
@@ -55,7 +66,57 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         }
         if(product.area.toString().equals("Ropa")){
             holder.image.setImageResource(R.drawable.ropa);
-        }
+        }*/
+
+        holder.vendido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context, String.valueOf(product.getTotal_existencia()),Toast.LENGTH_LONG).show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                LayoutInflater inflate = LayoutInflater.from(context);
+                View view_vend = inflate.inflate(R.layout.add_prod, null);
+                dialog.setView(view_vend);
+                dialog.create().show();
+
+                final General general = General.getInstance();
+
+                TextView head = view_vend.findViewById(R.id.head);
+                head.setText("Venta");
+
+                TextView prod_nam_text = view_vend.findViewById(R.id.prod_nam_text);
+                prod_nam_text.setText(product.getNombre() + " " + product.getContenido_neto());
+
+                final EditText vend_cant = view_vend.findViewById(R.id.add_cant);
+                TextView vender = view_vend.findViewById(R.id.send_add_cant);
+                vender.setText("Vender");
+
+                final String bit_key = general.bitacora.push().getKey();
+                final Bitacora_Obj obj_bit = new Bitacora_Obj("Productos",general.fecha, general.hour, "Vendió Producto", "U", general.usario,bit_key.toString(),general.local);
+
+                vender.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!vend_cant.getText().toString().isEmpty() && Integer.parseInt(vend_cant.getText().toString()) < product.getTotal_existencia()){
+                            int tot = product.getTotal_existencia() - Integer.parseInt(vend_cant.getText().toString());
+                            general.reference.child("Productos").child(product.getKey_product()).child("total_existencia").setValue(tot);
+                            Toast.makeText(context, "Se vendio el producto", Toast.LENGTH_LONG).show();
+                            general.bitacora.child(bit_key).setValue(obj_bit);
+
+                            Double total = (Double) (Integer.parseInt(vend_cant.getText().toString()) * product.precio);
+                            String key = general.reference.child("Ventas").push().getKey();
+                            Ventas vent = new Ventas(general.fecha, general.hour_ws,product.getNombre(),product.getContenido_neto(), key, general.usario, Integer.parseInt(vend_cant.getText().toString()), total, product.precio, product.getArea());
+                            general.reference.child("Ventas").child(key).setValue(vent);
+                            vend_cant.setText("");
+                        }
+                        else{
+                            Toast.makeText(context, "Verifique la existencia del producto", Toast.LENGTH_LONG).show();
+                            vend_cant.setText("");
+                        }
+                    }
+                });
+
+            }
+        });
 
     }
 
@@ -102,8 +163,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
     class ProductHolder extends RecyclerView.ViewHolder{
 
-        TextView product_name, price, expiration, existence, area;
-        ImageView image;
+        TextView product_name, price, expiration, existence, area, vendido, edit_prod, del_prod;
+        TextView image;
 
         public ProductHolder(View itemView) {
             super(itemView);
@@ -113,6 +174,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
             existence = itemView.findViewById(R.id.existence);
             area = itemView.findViewById(R.id.area);
             image = itemView.findViewById(R.id.image);
+            vendido = itemView.findViewById(R.id.vendido);
+            edit_prod = itemView.findViewById(R.id.edit_prod);
+            del_prod = itemView.findViewById(R.id.del_prod);
         }
     }
 }

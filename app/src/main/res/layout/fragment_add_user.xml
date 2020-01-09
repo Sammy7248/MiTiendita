@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Registrar Usuario"
         android:textSize="25dp"
+        android:id="@+id/header_addus"
         android:gravity="center"
         android:layout_margin="5dp"
         android:textColor="@color/colorPrimary"

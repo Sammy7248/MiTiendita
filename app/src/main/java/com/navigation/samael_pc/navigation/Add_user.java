@@ -18,7 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.security.NoSuchAlgorithmException;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -30,7 +32,7 @@ public class Add_user extends Fragment {
     DatabaseReference child;
     TextInputEditText username, password, nombre, apellido, confirm_password;
     TextView register;
-    public static final String AES = "AES";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,10 +72,15 @@ public class Add_user extends Fragment {
                         try {
                             String key = child.push().getKey();
                             String pass = null;
-                            pass = encriptar(password.getText().toString());
-                            Usuario user = new Usuario(username.getText().toString(), pass, nombre.getText().toString(), apellido.getText().toString(), 1, false,key, general.fecha.toString(), general.hour.toString());
+                            pass = general.encriptar(password.getText().toString());
+                            Usuario user = new Usuario(username.getText().toString(), pass, nombre.getText().toString(), apellido.getText().toString(), 1, false,key, general.fecha.toString(), general.hour_ws.toString());
                             //child(key).
                             child.child(key).setValue(user);
+
+                            String bit_key = general.bitacora.push().getKey();
+                            Bitacora_Obj obj_bit = new Bitacora_Obj("Usuarios",general.fecha, general.hour, "Agregó Usuario", "A", general.usario,bit_key,general.local);
+                            general.bitacora.child(bit_key).setValue(obj_bit);
+
                             username.setText("");
                             password.setText("");
                             nombre.setText("");
@@ -81,7 +88,7 @@ public class Add_user extends Fragment {
                             username.requestFocus();
                             confirm_password.setText("");
                             nombre.setFocusable(true);
-                            Toast.makeText(v.getContext(), "Usuario registrado correctamente"+key, Toast.LENGTH_LONG).show();
+                            Toast.makeText(v.getContext(), "Usuario registrado correctamente", Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -110,20 +117,7 @@ public class Add_user extends Fragment {
         return view;
     }
 
-    public static String encriptar(String password) throws Exception {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance(AES);
-        keyGenerator.init(128);
-        SecretKey scrKey = keyGenerator.generateKey();
-        byte[] bytesecret = scrKey.getEncoded();
-        SecretKeySpec secSpec = new SecretKeySpec(bytesecret, AES);
-        Cipher cip = Cipher.getInstance(AES);
-        cip.init(Cipher.ENCRYPT_MODE,secSpec);
-        byte[] encryptPass = cip.doFinal(password.getBytes());
 
-        //PARA DESENCRIPTAR EL PASSWORD
-        /*cip.init(Cipher.DECRYPT_MODE,secSpec);
-        byte[] decryptPass = cip.doFinal(encryptPass);*/
 
-        return new String(encryptPass.toString());
-    }
+
 }
